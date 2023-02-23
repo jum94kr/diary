@@ -15,8 +15,15 @@ const handleChangeState = (e) => {
 };
 
 const handleSubmit = () => {
-    console.log(state);
-    alert("Save Complete");
+    if (state.author.length <1) {
+      alert("Please enter more than 1 character");
+      return;
+    }
+    if (state.content.length <5) {
+     alert("Please enter more than 5 character");
+     return;
+    }
+    alert("Save Complete");  
 };
 
     return (
@@ -38,6 +45,7 @@ const handleSubmit = () => {
         </div>
 
         <div>
+            <span>Rating</span>
             <select name='emotion'
             value={state.emotion}
             onChange={handleChangeState}
