@@ -1,6 +1,9 @@
-import { useState } from "react";
+import React, { useRef, useState } from "react";
 
-const DiaryEditor = () => { 
+const DiaryEditor = () => {  
+    const authorInput = useRef();
+    const contentInput = useRef();
+
     const [state, setState] = useState ({
         author: "",
         content: "",
@@ -15,12 +18,13 @@ const handleChangeState = (e) => {
 };
 
 const handleSubmit = () => {
-    if (state.author.length <1) {
-      alert("Please enter more than 1 character");
+    if (state.author.length < 1) {
+      authorInput.current.focus();
       return;
     }
-    if (state.content.length <5) {
-     alert("Please enter more than 5 character");
+
+    if (state.content.length < 5) {
+        contentInput.current.focus();
      return;
     }
     alert("Save Complete");  
@@ -31,6 +35,7 @@ const handleSubmit = () => {
         <h2>How Are You Today</h2>
         <div>
             <input 
+                ref={authorInput}
                 name="author"
                 value={state.author} 
                 onChange={handleChangeState}
@@ -38,6 +43,7 @@ const handleSubmit = () => {
         </div>
         <div>
             <textarea 
+            ref={contentInput}
             name="content"
             value={state.content}
             onChange={handleChangeState}
